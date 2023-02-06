@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POKE MOn</title>
+</head>
+<body>
+    <div class="header">
+      <h1>GET YOUR PIKACHU</h1>
+
+      <input type="submit" id="poke" onclick="masa()" value="FIND U PIKACHU">
+
+      <p>your pickahu is here</p>
+      <div class="your pokemon " id="pokemon">
+
+      </div>
+    </div>
+    <script>
+      function masa() {
+        fetch('https://pokeapi.co/api/v2/pokemon-form/25/').then (
+      function(response){
+        if (response.status != 200) {
+          console.log("Oppps..." + response.status)
+          return
+        }
+        response.json().then(function(data) {
+          const pickahu = data.form 
+          document.getElementById('pokemon').insertAdjacentHTML('beforeend',
+          `<div style='height:240px; width:200px; text-align:center; background-color:#ebdc0f; margin:25px; flex-wrap:wrap; float:left;'>
+          <h1>${data.id} ${data.pokemon.name}</h1>
+          <img src="${data.sprites.front_default}">
+          <h1>Type  ${data.types[0].type.name}</h1>
+          </div>`)
+          
+        })
+      }
+      )
+      }
+    </script>
+</body>
+</html>
